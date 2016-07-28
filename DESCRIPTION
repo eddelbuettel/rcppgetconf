@@ -1,8 +1,8 @@
 Package: RcppGetconf
 Type: Package
-Title: Rcpp Interface for Querying System Configuration Variables
-Version: 0.0.1
-Date: 2016-07-26
+Title: 'Rcpp' Interface for Querying System Configuration Variables
+Version: 0.0.1.1
+Date: 2016-07-28
 Author: Dirk Eddelbuettel
 Maintainer: Dirk Eddelbuettel <edd@debian.org>
 Description: The 'getconf' command-line tool provided by 'libc' allows
@@ -10,8 +10,7 @@ Description: The 'getconf' command-line tool provided by 'libc' allows
  similar functionality.
 Imports: Rcpp
 LinkingTo: Rcpp
-SystemRequirements: A POSIX system. Currently only Linux is known to work. We
- have some hope for OS X, eventually.
+SystemRequirements: A POSIX system. Currently only Linux is known to work.
 OS_type: unix
 License: GPL (>= 2)
 Encoding: UTF-8

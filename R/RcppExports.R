@@ -8,17 +8,42 @@
 #' \code{pathconf} and \code{confstr} provide all the underlying information.
 #'
 #' @title Return all System Configuration Settings
-#' @param path An optional character object specifying a path. Default is the 
+#' @param path An optional character object specifying a path. Default is the
 #' current directory.
 #' @return A data.frame with three colums for key, value and (source) type.
 #' Not all keys return a value; in those cases an empty string is returned.
 #' Type is one of \code{path}, \code{sys} and \code{conf} and signals how the
 #' value was obtained.
 #' @author Dirk Eddelbuettel
+#' @seealso \code{\link{getConfig}}
 #' @examples
 #' head(getAll(), 30)
 #' subset(getAll(), type=="path")
 getAll <- function(path = ".") {
     .Call('RcppGetconf_getAll', PACKAGE = 'RcppGetconf', path)
+}
+
+#' Retrieve one configuration setting
+#'
+#' This functions returns the configuration setting for a given input.
+#' in a data.frame object. The system-level functions \code{sysconf},
+#' \code{pathconf} and \code{confstr} provide the underlying information.
+#'
+#' @title Return a System Configuration Setting
+#' @param var An character object specifying a value for which configuration
+#' is queried.
+#' @param path An optional character object specifying a path. Default is the
+#' current directory.
+#' @return A result value corresponding to the requested setting. The return
+#' type can be either integer for a numeric value, character for text or NULL
+#' in case to value could be retrieved.
+#' @author Dirk Eddelbuettel
+#' @seealso \code{\link{getAll}}
+#' @examples
+#' getConfig("_NPROCESSORS_CONF")   # number of processor
+#' getConfig("LEVEL1_ICACHE_SIZE")  # leve1 cache size
+#' getConfig("GNU_LIBC_VERSION")    # libc version
+getConfig <- function(var, path = ".") {
+    .Call('RcppGetconf_getConfig', PACKAGE = 'RcppGetconf', var, path)
 }
 

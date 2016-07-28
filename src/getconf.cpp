@@ -21,7 +21,7 @@
 
 // with thanks to getconf.c in the glibc source, see eg this mirror
 // at https://github.com/bminor/glibc/blob/master/posix/getconf.c
-// and adjusted to both C++ and compiling with the R framework
+// and adjusted to both C++ and compiling within the R framework
 
 #include <unistd.h>
 // included by Rcpp.h  #include <errno.h>
@@ -38,25 +38,25 @@ using namespace Rcpp;
 //#include "../version.h"
 //#define PACKAGE _libc_intl_domainname
 
-#define NEED_SPEC_ARRAY 1
+// we skip this  #define NEED_SPEC_ARRAY 1
 #include <posix-conf-vars.h>
 
-/* If all of the environments are defined in environments.h, then we don't need
-   to bother with doing a runtime check for a specific environment.  */
-#if (defined _SC_V6_ILP32_OFF32 \
-     && defined _SC_V7_LPBIG_OFFBIG \
-     && defined _SC_XBS5_LP64_OFF64 \
-     && defined _SC_V6_LP64_OFF64 \
-     && defined _SC_V7_ILP32_OFFBIG \
-     && defined _SC_V6_LPBIG_OFFBIG \
-     && defined _SC_V7_LP64_OFF64 \
-     && defined _SC_V7_ILP32_OFF32 \
-     && defined _SC_XBS5_LPBIG_OFFBIG \
-     && defined _SC_XBS5_ILP32_OFFBIG \
-     && defined _SC_V6_ILP32_OFFBIG \
-     && defined _SC_XBS5_ILP32_OFF32)
-# define ALL_ENVIRONMENTS_DEFINED 1
-#endif
+// /* If all of the environments are defined in environments.h, then we don't need
+//    to bother with doing a runtime check for a specific environment.  */
+// #if (defined _SC_V6_ILP32_OFF32 \
+//      && defined _SC_V7_LPBIG_OFFBIG \
+//      && defined _SC_XBS5_LP64_OFF64 \
+//      && defined _SC_V6_LP64_OFF64 \
+//      && defined _SC_V7_ILP32_OFFBIG \
+//      && defined _SC_V6_LPBIG_OFFBIG \
+//      && defined _SC_V7_LP64_OFF64 \
+//      && defined _SC_V7_ILP32_OFF32 \
+//      && defined _SC_XBS5_LPBIG_OFFBIG \
+//      && defined _SC_XBS5_ILP32_OFFBIG \
+//      && defined _SC_V6_ILP32_OFFBIG \
+//      && defined _SC_XBS5_ILP32_OFF32)
+// # define ALL_ENVIRONMENTS_DEFINED 1
+// #endif
 
 // C++ variant of enum
 enum call { SYSCONF, CONFSTR, PATHCONF };
@@ -430,13 +430,14 @@ static const struct conf vars[] = {
 //' \code{pathconf} and \code{confstr} provide all the underlying information.
 //'
 //' @title Return all System Configuration Settings
-//' @param path An optional character object specifying a path. Default is the 
+//' @param path An optional character object specifying a path. Default is the
 //' current directory.
 //' @return A data.frame with three colums for key, value and (source) type.
 //' Not all keys return a value; in those cases an empty string is returned.
 //' Type is one of \code{path}, \code{sys} and \code{conf} and signals how the
 //' value was obtained.
 //' @author Dirk Eddelbuettel
+//' @seealso \code{\link{getConfig}}
 //' @examples
 //' head(getAll(), 30)
 //' subset(getAll(), type=="path")
@@ -499,4 +500,75 @@ DataFrame getAll(const std::string & path = ".") {
     return DataFrame::create(Named("key") = vname,
                              Named("value") = vvalue,
                              Named("type") = vtype);
+}
+
+//' Retrieve one configuration setting
+//'
+//' This functions returns the configuration setting for a given input.
+//' in a data.frame object. The system-level functions \code{sysconf},
+//' \code{pathconf} and \code{confstr} provide the underlying information.
+//'
+//' @title Return a System Configuration Setting
+//' @param var An character object specifying a value for which configuration
+//' is queried.
+//' @param path An optional character object specifying a path. Default is the
+//' current directory.
+//' @return A result value corresponding to the requested setting. The return
+//' type can be either integer for a numeric value, character for text or NULL
+//' in case to value could be retrieved.
+//' @author Dirk Eddelbuettel
+//' @seealso \code{\link{getAll}}
+//' @examples
+//' getConfig("_NPROCESSORS_CONF")   # number of processor
+//' getConfig("LEVEL1_ICACHE_SIZE")  # leve1 cache size
+//' getConfig("GNU_LIBC_VERSION")    # libc version
+// [[Rcpp::export]]
+SEXP getConfig(const std::string & var,
+               const std::string & path = ".") {
+
+    const char *vararg = var.c_str();
+    const struct conf *c;
+
+    for (c = vars; c->name != NULL; ++c) {
+        if (strcmp (c->name, vararg) == 0 ||
+            (strncmp (c->name, "_POSIX_", 7) == 0 && strcmp (c->name + 7, vararg) == 0)) {
+            long int value;
+            size_t clen;
+            char *cvalue;
+            switch (c->calltype) {
+            case PATHCONF:
+                value = pathconf (path.c_str(), c->call_name);
+                if (value == -1) {
+                    Rcpp::stop("Error with path arg: %s", path.c_str());
+                } else {
+                    return Rcpp::wrap(value);
+                }
+
+            case SYSCONF:
+                value = sysconf (c->call_name);
+                if (value == -1l) {
+                    if (c->call_name == _SC_UINT_MAX || c->call_name == _SC_ULONG_MAX) {
+                        return Rcpp::wrap(value);
+                    } else {
+                        Rcpp::stop("undefined");
+                    }
+                } else {
+                    return Rcpp::wrap(value);
+                }
+
+            case CONFSTR:
+                clen = confstr (c->call_name, (char *) NULL, 0);
+                cvalue = R_alloc(clen, sizeof(char));
+                if (cvalue == NULL) {
+                    Rcpp::stop("memory exhausted");
+                }
+                if (confstr(c->call_name, cvalue, clen) != clen) {
+                    Rcpp:stop("Error with confstr");
+                }
+                return Rcpp::wrap(std::string(cvalue));
+            }
+        }
+    }
+    // fallback
+    return R_NilValue;
 }

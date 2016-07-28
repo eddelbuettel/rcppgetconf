@@ -7,7 +7,7 @@
 getAll(path = ".")
 }
 \arguments{
-\item{path}{An optional character object specifying a path. Default is the 
+\item{path}{An optional character object specifying a path. Default is the
 current directory.}
 }
 \value{
@@ -30,5 +30,8 @@ subset(getAll(), type=="path")
 }
 \author{
 Dirk Eddelbuettel
+}
+\seealso{
+\code{\link{getConfig}}
 }
 

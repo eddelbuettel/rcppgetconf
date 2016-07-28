@@ -15,11 +15,20 @@ its data structures in the system header files.  We have used it
 exclusively on Linux so far.  It _should_ work on OS X, and contributions
 would be very welcome.
 
+### Installation
+
+The package is on [CRAN](http://cran.r-project.org) and can be installed via
+a standard
+
+```r
+R> install.packages("RcppGetconf")
+```
+
 ### Status
 
-It builds and provides so far a single function `getAll()`. It may go to
-[CRAN](https://cran.r-project.org/package=RcppGetconf) in its current
-form as it builds cleanly.
+It contains two useful functions right now.
+It builds cleanly, but so far only on Linux. Help with OS X would greatly
+appreciated.
 
 ### Author
 

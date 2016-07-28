@@ -16,3 +16,15 @@ BEGIN_RCPP
     return __result;
 END_RCPP
 }
+// getConfig
+SEXP getConfig(const std::string& var, const std::string& path);
+RcppExport SEXP RcppGetconf_getConfig(SEXP varSEXP, SEXP pathSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject __result;
+    Rcpp::RNGScope __rngScope;
+    Rcpp::traits::input_parameter< const std::string& >::type var(varSEXP);
+    Rcpp::traits::input_parameter< const std::string& >::type path(pathSEXP);
+    __result = Rcpp::wrap(getConfig(var, path));
+    return __result;
+END_RCPP
+}
