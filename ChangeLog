@@ -1,3 +1,7 @@
+2016-07-29  Qiang Kou <qkou@umail.iu.edu>
+
+	* src/getconf.cpp: Redefine struct in more portable way
+
 2016-07-28  Dirk Eddelbuettel  <edd@debian.org>
 
 	* src/getconf.cpp (getConfig): New function

@@ -26,9 +26,9 @@ R> install.packages("RcppGetconf")
 
 ### Status
 
-It contains two useful functions right now.
-It builds cleanly, but so far only on Linux. Help with OS X would greatly
-appreciated.
+It contains two useful functions right now.  It currently builds cleanly on
+Linux and OS X; reports from other builds would (and PRs where needed) would
+be greatly appreciated.
 
 ### Author
 
