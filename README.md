@@ -10,10 +10,10 @@ values back to R.
 
 ### Requirements
 
-This package requires access to these system calls, and definitions of
-its data structures in the system header files.  We have used it
-exclusively on Linux so far.  It _should_ work on OS X, and contributions
-would be very welcome.
+This package requires access to these system calls, and definitions of its
+data structures in the system header files.  It works on Linux and OS X and
+_should_ work on other POSIX-compliant OSs. Contributions would be very
+welcome.
 
 ### Installation
 
