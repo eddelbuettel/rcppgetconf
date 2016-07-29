@@ -33,30 +33,12 @@
 // included by Rcpp.h  #include <stdio.h>
 
 #include <Rcpp.h>
-using namespace Rcpp;
 
 //#include "../version.h"
 //#define PACKAGE _libc_intl_domainname
 
 // we skip this  #define NEED_SPEC_ARRAY 1
 #include <posix-conf-vars.h>
-
-// /* If all of the environments are defined in environments.h, then we don't need
-//    to bother with doing a runtime check for a specific environment.  */
-// #if (defined _SC_V6_ILP32_OFF32 \
-//      && defined _SC_V7_LPBIG_OFFBIG \
-//      && defined _SC_XBS5_LP64_OFF64 \
-//      && defined _SC_V6_LP64_OFF64 \
-//      && defined _SC_V7_ILP32_OFFBIG \
-//      && defined _SC_V6_LPBIG_OFFBIG \
-//      && defined _SC_V7_LP64_OFF64 \
-//      && defined _SC_V7_ILP32_OFF32 \
-//      && defined _SC_XBS5_LPBIG_OFFBIG \
-//      && defined _SC_XBS5_ILP32_OFFBIG \
-//      && defined _SC_V6_ILP32_OFFBIG \
-//      && defined _SC_XBS5_ILP32_OFF32)
-// # define ALL_ENVIRONMENTS_DEFINED 1
-// #endif
 
 // C++ variant of enum
 enum call { SYSCONF, CONFSTR, PATHCONF };
@@ -1053,7 +1035,7 @@ static const struct conf vars[] = {
 //' head(getAll(), 30)
 //' subset(getAll(), type=="path")
 // [[Rcpp::export]]
-DataFrame getAll(const std::string & path = ".") {
+Rcpp::DataFrame getAll(const std::string & path = ".") {
 
     const struct conf *c;
     size_t clen;
@@ -1071,10 +1053,8 @@ DataFrame getAll(const std::string & path = ".") {
         case PATHCONF:
             value = pathconf (path.c_str(), c->call_name);
             if (value != -1) {
-                //printf("%ld", value);
                 snprintf(buf, 255, "%ld", value);
             }
-            //printf("\n");
             vtype.push_back("path");
             break;
         case SYSCONF:
@@ -1082,37 +1062,31 @@ DataFrame getAll(const std::string & path = ".") {
             if (value == -1l) {
 #if defined(_SC_UINT_MAX) && defined(_SC_ULONG_MAX)
                 if (c->call_name == _SC_UINT_MAX || c->call_name == _SC_ULONG_MAX)
-                    //printf ("%lu", value);
                     snprintf(buf, 255, "%lu", value);
 #endif
             } else {
-                //printf ("%ld", value);
                 snprintf(buf, 255, "%ld", value);
             }
-            //printf ("\n");
             vtype.push_back("sys");
             break;
         case CONFSTR:
             clen = confstr (c->call_name, (char *) NULL, 0);
-            //cvalue = (char *) malloc (clen);
             cvalue = R_alloc(clen, sizeof(char));
-            if (cvalue == NULL)
-                //error (3, 0, _("memory exhausted"));
-                stop("Memory allocation error");
-            if (confstr (c->call_name, cvalue, clen) != clen)
-                //error (3, errno, "confstr");
-                stop("Confstr error");
-            //printf ("%.*s\n", (int) clen, cvalue);
+            if (cvalue == NULL) {
+                Rcpp::stop("Memory allocation error");
+            }
+            if (confstr (c->call_name, cvalue, clen) != clen) {
+                Rcpp::stop("Confstr error");
+            }
             snprintf(buf, 255, "%.*s", (int) clen, cvalue);
-            //free (cvalue);
             vtype.push_back("conf");
             break;
         }
         vvalue.push_back(buf);
     }
-    return DataFrame::create(Named("key") = vname,
-                             Named("value") = vvalue,
-                             Named("type") = vtype);
+    return Rcpp::DataFrame::create(Rcpp::Named("key") = vname,
+                                   Rcpp::Named("value") = vvalue,
+                                   Rcpp::Named("type") = vtype);
 }
 
 //' Retrieve one configuration setting
@@ -1180,7 +1154,7 @@ SEXP getConfig(const std::string & var,
                     Rcpp::stop("memory exhausted");
                 }
                 if (confstr(c->call_name, cvalue, clen) != clen) {
-                    Rcpp:stop("Error with confstr");
+                    Rcpp::stop("Error with confstr");
                 }
                 return Rcpp::wrap(std::string(cvalue));
             }
