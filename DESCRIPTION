@@ -1,7 +1,7 @@
 Package: RcppGetconf
 Type: Package
 Title: 'Rcpp' Interface for Querying System Configuration Variables
-Version: 0.0.2
+Version: 0.0.2.1
 Date: 2016-08-01
 Author: Dirk Eddelbuettel
 Maintainer: Dirk Eddelbuettel <edd@debian.org>
@@ -16,4 +16,4 @@ SystemRequirements: A POSIX system. Currently Linux and OS X are known to work.
 OS_type: unix
 License: GPL (>= 2)
 Encoding: UTF-8
-RoxygenNote: 5.0.1
+RoxygenNote: 6.0.1

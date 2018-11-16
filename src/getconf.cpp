@@ -1032,8 +1032,10 @@ static const struct conf vars[] = {
 //' @author Dirk Eddelbuettel
 //' @seealso \code{\link{getConfig}}
 //' @examples
-//' head(getAll(), 30)
-//' subset(getAll(), type=="path")
+//' if (Sys.info()[["sysname"]] != "SunOS") {
+//'     head(getAll(), 30)
+//'     subset(getAll(), type=="path")
+//' }
 // [[Rcpp::export]]
 Rcpp::DataFrame getAll(const std::string & path = ".") {
 
@@ -1106,9 +1108,11 @@ Rcpp::DataFrame getAll(const std::string & path = ".") {
 //' @author Dirk Eddelbuettel
 //' @seealso \code{\link{getAll}}
 //' @examples
-//' getConfig("_NPROCESSORS_CONF")   # number of processor
-//' getConfig("LEVEL1_ICACHE_SIZE")  # leve1 cache size
-//' getConfig("GNU_LIBC_VERSION")    # libc version
+//' if (Sys.info()[["sysname"]] != "SunOS") {
+//'     getConfig("_NPROCESSORS_CONF")   # number of processor
+//'     getConfig("LEVEL1_ICACHE_SIZE")  # leve1 cache size
+//'     getConfig("GNU_LIBC_VERSION")    # libc version
+//' }
 // [[Rcpp::export]]
 SEXP getConfig(const std::string & var,
                const std::string & path = ".") {

@@ -27,14 +27,15 @@ in a data.frame object. The system-level functions \code{sysconf},
 \code{pathconf} and \code{confstr} provide the underlying information.
 }
 \examples{
-getConfig("_NPROCESSORS_CONF")   # number of processor
-getConfig("LEVEL1_ICACHE_SIZE")  # leve1 cache size
-getConfig("GNU_LIBC_VERSION")    # libc version
+if (Sys.info()[["sysname"]] != "SunOS") {
+    getConfig("_NPROCESSORS_CONF")   # number of processor
+    getConfig("LEVEL1_ICACHE_SIZE")  # leve1 cache size
+    getConfig("GNU_LIBC_VERSION")    # libc version
 }
-\author{
-Dirk Eddelbuettel
 }
 \seealso{
 \code{\link{getAll}}
 }
-
+\author{
+Dirk Eddelbuettel
+}

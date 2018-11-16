@@ -25,13 +25,14 @@ in a data.frame object. The system-level functions \code{sysconf},
 \code{pathconf} and \code{confstr} provide all the underlying information.
 }
 \examples{
-head(getAll(), 30)
-subset(getAll(), type=="path")
+if (Sys.info()[["sysname"]] != "SunOS") {
+    head(getAll(), 30)
+    subset(getAll(), type=="path")
 }
-\author{
-Dirk Eddelbuettel
 }
 \seealso{
 \code{\link{getConfig}}
 }
-
+\author{
+Dirk Eddelbuettel
+}
