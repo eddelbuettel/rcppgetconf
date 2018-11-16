@@ -1,8 +1,8 @@
 Package: RcppGetconf
 Type: Package
 Title: 'Rcpp' Interface for Querying System Configuration Variables
-Version: 0.0.2.1
-Date: 2016-08-01
+Version: 0.0.3
+Date: 2018-11-16
 Author: Dirk Eddelbuettel
 Maintainer: Dirk Eddelbuettel <edd@debian.org>
 Description: The 'getconf' command-line tool provided by 'libc' allows

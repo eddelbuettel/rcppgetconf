@@ -4,6 +4,12 @@
 \newcommand{\ghpr}{\href{https://github.com/eddelbuettel/rcppgetconf/pull/#1}{##1}}
 \newcommand{\ghit}{\href{https://github.com/eddelbuettel/rcppgetconf/issues/#1}{##1}}
 
+\section{Changes in inline version 0.0.3 (2018-11-16)}{
+  \itemize{
+    \item Examples no longer run on Solaris where they appear to fail.
+  }
+}
+
 \section{Changes in inline version 0.0.2 (2016-08-01)}{
   \itemize{
     \item A new function \code{getConfig} for single values was added.

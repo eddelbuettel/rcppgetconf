@@ -1,3 +1,7 @@
+2018-11-16  Dirk Eddelbuettel  <edd@debian.org>
+
+	* DESCRIPTION (Version, Date): Release 0.0.3
+
 2018-11-15  Dirk Eddelbuettel  <edd@debian.org>
 
 	* src/getconf.cpp: Do not run examples on Solaris
