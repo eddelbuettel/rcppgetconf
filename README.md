@@ -1,6 +1,7 @@
 ## RcppGetconf: Rcpp Interface for Querying System Configuration Variables
 
 [![Build Status](https://travis-ci.org/eddelbuettel/rcppgetconf.svg)](https://travis-ci.org/eddelbuettel/rcppgetconf) 
+[![CI](https://github.com/eddelbuettel/rcppgetconf/workflows/ci/badge.svg)](https://github.com/eddelbuettel/rcppgetconf/actions?query=workflow%3Aci)
 [![License](http://img.shields.io/badge/license-GPL%20%28%3E=%202%29-brightgreen.svg?style=flat)](http://www.gnu.org/licenses/gpl-2.0.html) 
 [![CRAN](http://www.r-pkg.org/badges/version/RcppGetconf)](https://cran.r-project.org/package=RcppGetconf) 
 [![Dependencies](https://tinyverse.netlify.com/badge/RcppGetconf)](https://cran.r-project.org/package=RcppGetconf) 
