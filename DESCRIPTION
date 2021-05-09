@@ -8,7 +8,7 @@ Maintainer: Dirk Eddelbuettel <edd@debian.org>
 Description: The 'getconf' command-line tool provided by 'libc' allows
  querying of a large number of system variables. This package provides
  similar functionality.
-URL: http://dirk.eddelbuettel.com/code/rcpp.getconf.html
+URL: hhttps://github.com/eddelbuettel/rcppgetconf, ttps://dirk.eddelbuettel.com/code/rcpp.getconf.html
 BugReports: https://github.com/eddelbuettel/rcppgetconf/issues
 Imports: Rcpp
 LinkingTo: Rcpp
