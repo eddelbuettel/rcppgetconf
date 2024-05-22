@@ -3,7 +3,7 @@
 [![CI](https://github.com/eddelbuettel/rcppgetconf/workflows/ci/badge.svg)](https://github.com/eddelbuettel/rcppgetconf/actions?query=workflow%3Aci)
 [![License](http://img.shields.io/badge/license-GPL%20%28%3E=%202%29-brightgreen.svg?style=flat)](http://www.gnu.org/licenses/gpl-2.0.html) 
 [![CRAN](http://www.r-pkg.org/badges/version/RcppGetconf)](https://cran.r-project.org/package=RcppGetconf) 
-[![Dependencies](https://tinyverse.netlify.com/badge/RcppGetconf)](https://cran.r-project.org/package=RcppGetconf) 
+[![Dependencies](https://tinyverse.netlify.app/badge/RcppGetconf)](https://cran.r-project.org/package=RcppGetconf) 
 [![Downloads](https://cranlogs.r-pkg.org/badges/RcppGetconf?color=brightgreen)](https://www.r-pkg.org/pkg/RcppGetconf)
 [![Last Commit](https://img.shields.io/github/last-commit/eddelbuettel/rcppgetconf)](https://github.com/eddelbuettel/rcppgetconf)
 
