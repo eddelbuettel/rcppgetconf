@@ -3,8 +3,8 @@ Type: Package
 Title: 'Rcpp' Interface for Querying System Configuration Variables
 Version: 0.0.3.1
 Date: 2018-11-16
-Author: Dirk Eddelbuettel
-Maintainer: Dirk Eddelbuettel <edd@debian.org>
+Authors@R: person("Dirk", "Eddelbuettel", role = c("aut", "cre"), email = "edd@debian.org",
+                  comment = c(ORCID = "0000-0001-6419-907X"))
 Description: The 'getconf' command-line tool provided by 'libc' allows
  querying of a large number of system variables. This package provides
  similar functionality.
