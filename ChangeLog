@@ -1,3 +1,7 @@
+2025-01-01  Dirk Eddelbuettel  <edd@debian.org>
+
+	* cleanup: Use /bin/sh not /bin/bash
+
 2024-10-18  Dirk Eddelbuettel  <edd@debian.org>
 
 	* DESCRIPTION (Authors@R): Added
