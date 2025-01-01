@@ -4,6 +4,8 @@
 
 	* cleanup: Use /bin/sh not /bin/bash
 
+	* .github/workflows/ci.yaml: Simplify to r-ci with included bootstrap
+
 2024-10-18  Dirk Eddelbuettel  <edd@debian.org>
 
 	* DESCRIPTION (Authors@R): Added
