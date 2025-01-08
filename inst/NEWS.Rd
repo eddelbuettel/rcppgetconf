@@ -4,14 +4,14 @@
 \newcommand{\ghpr}{\href{https://github.com/eddelbuettel/rcppgetconf/pull/#1}{##1}}
 \newcommand{\ghit}{\href{https://github.com/eddelbuettel/rcppgetconf/issues/#1}{##1}}
 
-\section{Changes in inline version 0.0.4 (2025-01-xx)}{
+\section{Changes in inline version 0.0.4 (2025-01-07)}{
   \itemize{
     \item Dynamically linked compiled code is now regiestered in
     \code{NAMESPACE}
     \item The continuous integration setup was update several times
     \item The \code{README} was updated with current badges and URLs
     \item The \code{DESCRIPTION} file now uses \code{Authors@R}
-    \item The \code{cleanup} script uses \code{/bin/sh}
+    \item The \code{configure} and \code{cleanup} scripts use \code{/bin/sh}
   }
 }
 
