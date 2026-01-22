@@ -4,9 +4,9 @@
 \newcommand{\ghpr}{\href{https://github.com/eddelbuettel/rcppgetconf/pull/#1}{##1}}
 \newcommand{\ghit}{\href{https://github.com/eddelbuettel/rcppgetconf/issues/#1}{##1}}
 
-\section{Changes in inline version 0.0.4 (2025-01-07)}{
+\section{Changes in RcppGetconf version 0.0.4 (2025-01-07)}{
   \itemize{
-    \item Dynamically linked compiled code is now regiestered in
+    \item Dynamically linked compiled code is now registered in
     \code{NAMESPACE}
     \item The continuous integration setup was update several times
     \item The \code{README} was updated with current badges and URLs
@@ -15,13 +15,13 @@
   }
 }
 
-\section{Changes in inline version 0.0.3 (2018-11-16)}{
+\section{Changes in RcppGetconf version 0.0.3 (2018-11-16)}{
   \itemize{
     \item Examples no longer run on Solaris where they appear to fail.
   }
 }
 
-\section{Changes in inline version 0.0.2 (2016-08-01)}{
+\section{Changes in RcppGetconf version 0.0.2 (2016-08-01)}{
   \itemize{
     \item A new function \code{getConfig} for single values was added.
     \item The \code{struct vars} is now defined more portable allowing
@@ -29,7 +29,7 @@
   }
 }
 
-\section{Changes in version 0.0.1 (2016-07-26)}{
+\section{Changes in RcppGetconf version 0.0.1 (2016-07-26)}{
   \itemize{
     \item Initial CRAN upload with \code{getAll} function.
     \item Package is functional on Linux.
